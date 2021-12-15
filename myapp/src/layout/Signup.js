@@ -1,115 +1,143 @@
-import React from 'react'
+import React, { Component, Fragment } from 'react'
 import tutorialServies from '../services/tutorial.servies';
+import { Card, Form, Button } from "react-bootstrap";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import bcrypt from 'bcryptjs'
+export default class NameForm extends Component {
+  salt = bcrypt.genSaltSync(10);
+  constructor(props) {
+    super(props);
+    this.state = {
+      nom: '',
+      prenom: '',
+      adresse: '',
+      email: '',
+      password: '',
+      NCIN: '',
+      tel: ''
+    };
 
-export default class AddClient extends Comment {
- constructor(props){
-   super(props);
-   
-   this.onChangenomHandler = this.onChangenomHandler.bind(this);
-   this.onChangeprenomHandler = this.onChangeprenomHandler.bind(this);
-   this.onChangeadresseHandler = this.onChangeadresseHandler.bind(this);
-   this.onChangetelHandler = this.onChangetelHandler.bind(this);
-   this.onChangemailHandler = this.onChangemailHandler.bind(this);
-   this.onChangePasswordHandler = this.onChangePasswordHandler.bind(this);
-   this.onChangencinHandler = this.onChangencinHandler.bind(this);
-   this.state = {
-    nom:'',
-    prenom:'',
-    adresse:'',
-    tel:'',
-    mail:'',
-    password:'',
-    ncin:''
-  };
+    this.handleChange = this.handleChange.bind(this);
+    this.HandleChangeprenom = this.HandleChangeprenom.bind(this);
+    this.HandleChangeadresse = this.HandleChangeadresse.bind(this);
+    this.HandleChangetel = this.HandleChangetel.bind(this);
+    this.HandleChangeNCIN = this.HandleChangeNCIN.bind(this);
+    this.HandleChangeemail = this.HandleChangeemail.bind(this);
+    this.HandleChangepassword = this.HandleChangepassword.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-   SaveClient = (e) =>{
-     e.preventDefault();
-     let client = {nom:this.state.nom,
-       prenom:this.state.prenom,
-     adresse:this.state.adresse,
-     tel: this.state.tel,
-     mail:this.state.mail,
-     password:this.state.password,
-     ncin:this.state.ncin}
-     console.log('client=>' + JSON.stringify(client));
-      tutorialServies.create(client).then(res=>{
-        this.props.history.push('/clients');
+
+
+  handleChange(event) {
+    this.setState({ nom: event.target.value });
+  }
+  HandleChangeprenom(event) {
+    this.setState({ prenom: event.target.value });
+  }
+  HandleChangeadresse(event) {
+    this.setState({ adresse: event.target.value });
+  }
+  HandleChangepassword(event) {
+    this.setState({ password: event.target.value });
+  }
+  HandleChangeemail(event) {
+    this.setState({ email: event.target.value });
+  }
+  HandleChangeNCIN(event) {
+    this.setState({ NCIN: event.target.value });
+  }
+  HandleChangetel(event) {
+    this.setState({ tel: event.target.value });
+  }
+
+  handleSubmit = (e) => {
+
+    e.preventDefault();
+    if (this.state.nom == "") {
+      toast.error("saisie votre Nom ");
+    }
+    else if (this.state.prenom == "") {
+      toast.error("saisie votre Prénom");
+    }
+    else if (this.state.adresse == "") {
+      toast.error("saisie votre Adresse ");
+    }
+    else if (this.state.NCIN == "") {
+      toast.error("saisie votre Numéro de CIN");
+    }
+    else if (this.state.tel == "") {
+      toast.error("saisie votre Numéro de Téléphone");
+    }
+    else if (this.state.email == "") {
+      toast.error("saisie votre Email");
+    }
+    else if (this.state.password == "") {
+      toast.error("saisie votre Password ");
+    }
+    else {
+      toast.success("Inscription réussite");
+
+      let client = {
+        nom: this.state.nom,
+        prenom: this.state.prenom,
+        adresse: this.state.adresse,
+        tel:this.state.tel,
+        mail: this.state.email,
+        password: bcrypt.hashSync(this.state.password, '$2a$10$CwTycUXWue0Thq9StjUM0u'),
+        ncin: this.state.NCIN
+      }
+      console.log('client=>' + JSON.stringify(client));
+      tutorialServies.createClient(client).then(res => {
+        this.props.history.push('/login');
       })
-   }
-   onChangenomHandler=(ee)=>{
-     this.setState({nom:ee.target.value})
-   }
-   onChangeprenomHandler=(ee)=>{
-    this.setState({prenom:ee.target.value})
-   }
-  onChangeadresseHandler=(ee)=>{
-    this.setState({adresse:ee.target.value})
-  }
-  onChangetelnomHandler=(ee)=>{
-    this.setState({tel:ee.target.value})
-  }
-  onChangemailHandler=(ee)=>{
-    this.setState({mail:ee.target.value})
-  }
-  onChangepasswordHandler=(ee)=>{
-    this.setState({password:ee.target.value})
-  }
-  onChangencinHandler=(ee)=>{
-    this.setState({ncin:ee.target.value})
-  }
-  
-   
- 
-  render(){  
-  return (
-        <div className="hhh">
-            <form>
-    <div >
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label >nom</label>
-      <input type="text" name="firstName" className="form-control" value={this.state.nom} onChange={this.onChangenomHandler} placeholder="nom"></input>
-    </div>
-    <div class="form-group col-md-6">
-      <label >Prénom</label>
-      <input type="text" class="form-control" value={this.state.prenom} onChange={this.onChangeprenomHandler}  placeholder="prenom"></input>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label >adresse</label>
-      <input type="text" class="form-control" value={this.state.adresse} onChange={this.onChangeadresseHandler}  placeholder="adresse"></input>
-    </div>
-    <div class="form-group col-md-6">
-      <label >tel</label>
-      <input type="text" class="form-control" value={this.state.tel} onChange={this.onChangetelHandler}  placeholder="tel"></input>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="inputEmail4">Email</label>
-      <input type="email" class="form-control" value={this.state.mail} onChange={this.onChangemailHandler}  placeholder="Email"></input>
-    </div>
-    <div class="form-group col-md-6">
-      <label >Mot de passe</label>
-      <input type="password" class="form-control" value={this.state.password} onChange={this.onChangepasswordHandler} placeholder="Mot de passe"></input>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="form-group ">
-      <label >N°CIN</label>
-      <input type="text" class="form-control" value={this.state.ncin} onChange={this.onChangencinHandler}  placeholder="CIN"></input>
-    </div>
-  <div></div>
-  </div>
- 
-   <div>
-    <button onClick={this.SaveClient} class="btn btn-primary">S'inscrire</button>
-   </div>
-  </div>
- </form>
 
-        </div>
-    )
+    }
+  }
+
+  render() {
+    return (
+      <div className="a">
+        <Card className={"border border-light bg-light text-black"}>
+          <Form onSubmit={this.handleSubmit}>
+            <Card.Body>
+              <Form.Group controlId="formGridNom" >
+                <Form.Label>Nom</Form.Label>
+                <Form.Control type="text" placeholder="nom" value={this.state.nom} onChange={this.handleChange} className="bg-light text-black" name="nom" />
+              </Form.Group>
+              <Form.Group controlId="formGridPrenom" >
+                <Form.Label>Prénom</Form.Label>
+                <Form.Control type="text" placeholder="Prénom" value={this.state.prenom} onChange={this.HandleChangeprenom} className="bg-light text-black" name="prenom" />
+              </Form.Group>
+              <Form.Group controlId="formGridPrenom" >
+                <Form.Label>Adresse</Form.Label>
+                <Form.Control type="text" placeholder="adresse" value={this.state.adresse} onChange={this.HandleChangeadresse} className="bg-light text-black" name="adresse" />
+              </Form.Group>
+              <Form.Group controlId="formGridPrenom" >
+                <Form.Label>N°CIN</Form.Label>
+                <Form.Control type="text" placeholder="NCIN" value={this.state.NCIN} onChange={this.HandleChangeNCIN} className="bg-light text-black" name="NCIN" />
+              </Form.Group>
+              <Form.Group controlId="formGridPrenom" >
+                <Form.Label>N°Tel</Form.Label>
+                <Form.Control type="text" placeholder="tel" value={this.state.tel} onChange={this.HandleChangetel} className="bg-light text-black" name="tel" />
+              </Form.Group>
+              <Form.Group controlId="formGridPrenom" >
+                <Form.Label>Adresse Email</Form.Label>
+                <Form.Control type="text" placeholder="email" value={this.state.email} onChange={this.HandleChangeemail} className="bg-light text-black" name="email" />
+              </Form.Group>
+              <Form.Group controlId="formGridPrenom" >
+                <Form.Label>password</Form.Label>
+                <Form.Control type="password" placeholder="password" value={this.state.password} onChange={this.HandleChangepassword} className="bg-light text-black" name="password" />
+              </Form.Group>
+              <Button type="submit" variant="success" >Envoyer</Button>
+              <ToastContainer />
+
+            </Card.Body>
+          </Form>
+        </Card>
+      </div>
+    );
   }
 }

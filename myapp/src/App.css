@@ -39,7 +39,84 @@
 /*------------------------------------------------------------- 
 	2. BASE CSS 
 -------------------------------------------------------------*/
+.Login{
+	background-color: white;
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.login__logo{
+	width: 123px;
+	object-fit: contain;	
+	padding-top :100px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+ .login__containe{
+	width: 365px;
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+   border: 1px solid lightgrey;
+ }
+ .d{
+	 margin-left: 100px;
+ }
+ .e{
+text-align: center;}
+.f{
+	margin-top: 10px;
+}
 
+.pic{
+	padding-top: 21px;
+	padding-left: 10px;
+	color: #636363;
+
+}
+.name{
+	padding-top: 18px;
+	padding-left: 7px;
+	color: #636363;
+}
+
+
+.b{
+	padding: 0;
+  margin: 0;
+  list-style: none;
+ 
+  
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+.c{
+
+  padding: 5px;
+  
+  
+
+  color: white;
+  font-weight: bold;
+  font-size: 2em;
+
+}
+.a2{
+	width: 500px;
+	margin:  0px 7px 0px 20% ;
+}
+.a{
+	width: 500px;
+	margin:  25px 7px 24px 35% ;
+}
+.aa{
+	width: 500px;
+	margin:  25px 7px 24px 17% ;
+}
 body {
 	font-family: 'Raleway', sans-serif;
 	font-weight: 400;
@@ -134,9 +211,15 @@ header .navbar-default .navbar-header {
 	height: 66px;
 	border-right: 1px solid #e8e8e8;
 }
+#for {
+	padding: 0px 0px;
+	margin: -1px;
+	width: 75%;
+	border: none;
+}
 
 .web-sh.navbar-form {
-	padding: 17px 15px;
+	padding: 0px 15px;
 	margin: -1px;
 	width: 72%;
 	border: none;
@@ -145,18 +228,20 @@ header .navbar-default .navbar-header {
 .left-rs {}
 
 .navbar-brand>img {
-	width: 90px;
+	width: 105px;
 }
-
+.g{
+	margin-top: 18px;
+}
 .web-sh.navbar-form input {
 	width: 100%;
 	background: none;
 	border: none;
 	box-shadow: none;
-	background-image: url("./images/search-icon.png");
+	/*background-image: url("./images/search-icon.png");*/
 	background-repeat: no-repeat;
 	background-position: left;
-	padding-left: 30px;
+	padding-left: 0px;
 	color: #474747;
 	font-weight: 400;
 }
@@ -299,7 +384,7 @@ header .navbar-default .navbar-header {
 }
 
 .login-signup {
-	padding: 13px 0px;
+	padding: 1px 0px;
 }
 
 .login-signup ul {
@@ -317,16 +402,26 @@ header .navbar-default .navbar-header {
 	font-weight: 300;
 	color: #636363;
 	text-decoration: none;
-	font-size: 14px;
-	display: block;
-	padding: 10px 23px;
+	font-size: 17px;
+	display: flex;
+	padding: 4px 9px;
 }
 
 .login-signup ul li a:hover {
 	color: #1e96ff;
 }
-
-.login-signup ul li a.custom-b {
+#custom-bb {
+	background: #1a6fcd;
+	border-radius: 3px;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 500;
+	color: #fff;
+	padding: 10px 23px;
+}
+#j{
+	border-top:3px solid #10101063;
+}
+.custom-b {
 	background: #09294c;
 	border-radius: 3px;
 	font-family: 'Raleway', sans-serif;
@@ -334,7 +429,33 @@ header .navbar-default .navbar-header {
 	color: #fff;
 	padding: 10px 23px;
 }
-
+#custom-i {
+	background: #308d00;
+	border-radius: 22px;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 500;
+	color: #fff;
+	margin-top: 3px;
+	padding: 7px 23px;
+}
+#custom-m {
+	background: #1a6fcd;
+	border-radius: 22px;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 500;
+	color: #fff;
+	margin-top: 3px;
+	padding: 7px 23px;
+}
+#custom-f {
+	background: #c94949;
+	border-radius: 22px;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 500;
+	color: #fff;
+	margin-top: 3px;
+	padding: 7px 23px;
+}
 .login-signup ul li a.custom-b:hover {
 	background: #1d99ff;
 }
@@ -366,7 +487,7 @@ header .navbar-default .navbar-header {
 	font-weight: 400;
 	color: #636363;
 	text-decoration: none;
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 42px;
 }
 
@@ -418,7 +539,7 @@ header .navbar-default .navbar-header {
 	font-weight: 300;
 	color: #636363;
 	text-decoration: none;
-	font-size: 14px;
+	font-size: 15px;
 	padding: 0px 10px;
 	font-weight: 400;
 }
@@ -465,7 +586,10 @@ header .navbar-default .navbar-header {
 	padding-bottom: 22px;
 }
 
-.product-sh {}
+.product-sh {
+	margin-left: 135px;
+	
+}
 
 .form-sh input {
 	background: none;
@@ -964,7 +1088,8 @@ header .navbar-default .navbar-header {
 }
 
 .prod-i img {
-	width: 100%;
+	width: 252px;
+	height: 265px;
 }
 
 .left-ti {
@@ -1913,6 +2038,7 @@ header .navbar-default .navbar-header {
 }
 
 .terms-title .breadcrumb li a {
+
 	color: #979694;
 }
 
@@ -1921,7 +2047,6 @@ header .navbar-default .navbar-header {
 }
 
 .terms-title .breadcrumb>li+li::before {
-	content: "\f101";
 	font-family: 'FontAwesome';
 	font-size: 12px;
 }
@@ -2860,7 +2985,7 @@ html .ui-button.ui-state-disabled:active {
 }
 
 .profile-pro-right .nav-tabs>li>a {
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: 400;
 	color: #353334;
 	border: none;
